@@ -9,7 +9,7 @@ Input will consist of a series of lines, each containing the initial five cards 
 
 Each line of input should produce one line of output, consisting of the initial hand, the top five cards on the deck, and the best value of hand that is possible. Input is terminated by end of file.   
 
-Use the sample input and output as a guide. Note that the order of the cards in the player's hand is irrelevant, but the order of the cards in the deck is important because the discarded cards must be replaced from the top of the deck. Also note that examples of all types of hands appear in the sample output, with the hands shown in decreasing order of value.  
+Use the sample input and output as a guide. **Constraint omitted from problem: Note that the order of the cards in the player's hand is irrelevant, but the order of the cards in the deck is important because the discarded cards must be replaced from the top of the deck**. Also note that examples of all types of hands appear in the sample output, with the hands shown in decreasing order of value.  
 
 ### Sample Input
 
