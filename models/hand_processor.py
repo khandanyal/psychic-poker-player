@@ -7,6 +7,7 @@ class HandProcessor(object):
     Normally the player cannot see the cards in the deck and so must use probability to decide which cards to discard.
     In this problem, we imagine that the poker player is psychic and knows which cards are on top of the deck.
     """
+
     def __init__(self, hand_n_deck):
         """
         Initializer for Poker Hand Processor.
