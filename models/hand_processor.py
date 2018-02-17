@@ -60,9 +60,9 @@ class HandProcessor(object):
         for card in cards:
             added = False
             for index, cc_list in enumerate(consecutive_cards_set_list):
-                cc_ranks_list = [card_.rank for card_ in cc_list]
+                cc_ranks_list = sorted([card_.rank for card_ in cc_list])
                 if card.rank not in cc_ranks_list and \
-                        (card.rank + 1 in cc_ranks_list or card.rank - 1 in cc_ranks_list):
+                        (card.rank + 1 == cc_ranks_list[0] or card.rank - 1 == cc_ranks_list[-1]):
                     consecutive_cards_set_list[index].append(card)
                     added = True
                     break
