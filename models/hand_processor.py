@@ -1,3 +1,5 @@
+from operator import attrgetter
+
 from models.cards import Card
 
 
@@ -54,6 +56,7 @@ class HandProcessor(object):
         :return: <list> List of lists containing consecutive cards.
         """
         consecutive_cards_set_list = list()
+        cards = sorted(cards, key=attrgetter('rank'))
         for card in cards:
             added = False
             for index, cc_list in enumerate(consecutive_cards_set_list):
