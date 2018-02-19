@@ -89,6 +89,34 @@ class HandProcessor(object):
 
         return face_cards_dict
 
+    def get_hand_deck_required_cards(self, cards):
+        hand_cards, deck_cards = list(), list()
+        for card in cards:
+            if card in self.hand_cards:
+                hand_cards.append(card)
+            else:
+                deck_cards.append(card)
+
+        return hand_cards, deck_cards
+
+    def get_farthest_deck_card_location(self, required_deck_cards):
+        locations = list()
+        for required_deck_card in required_deck_cards:
+            locations.append(self.deck_cards.index(required_deck_card) + 1)
+
+        return max(locations) if locations else 0
+
+    @staticmethod
+    def get_number_of_discardable_hand_cards(required_cards):
+        return 5 - len(required_cards)
+
+    def draw_possibility(self, required_cards):
+        required_hand_cards, required_deck_cards = self.get_hand_deck_required_cards(required_cards)
+        farthest_location = self.get_farthest_deck_card_location(required_deck_cards)
+        if farthest_location > self.get_number_of_discardable_hand_cards(required_hand_cards):
+            return False
+        return True
+
     def straight_flush_possible(self):
         """
         Function that determines whether a straight flush is possible.
