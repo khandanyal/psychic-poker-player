@@ -57,3 +57,7 @@ class Card(object):
             return self.FACE_RANKS[self.face.upper()]
 
         return int(self.face) if self.face.isdigit() else 10
+
+    def __eq__(self, other):
+        assert isinstance(other, Card), "Invalid comparison of Card with {}".format(type(other).__name__)
+        return self.face == other.face and self.suit == other.suit
