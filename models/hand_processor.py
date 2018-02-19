@@ -31,6 +31,8 @@ class HandProcessor(object):
             "The list of cards provided should not contain duplicates"
 
         self.hand_n_deck_cards = [Card(value) for value in hand_n_deck_split]
+        self.hand_cards = self.hand_n_deck_cards[:5]
+        self.deck_cards = self.hand_n_deck_cards[5:]
 
     @staticmethod
     def get_same_suit_cards(cards):
