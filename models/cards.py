@@ -7,7 +7,7 @@ class Card(object):
     """
     FACE_VALUES = ["T", "J", "Q", "K", "A"] + map(lambda num: str(num), range(2, 10))
     SUIT_VALUES = ["C", "D", "H", "S"]
-    FACE_RANKS = {"A": 14, "K": 13, "Q": 12, "J": 11}
+    FACE_RANKS = {"A": 1, "K": 13, "Q": 12, "J": 11}
 
     def __init__(self, value):
         """
