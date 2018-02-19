@@ -133,7 +133,9 @@ class HandProcessor(object):
                 if not len(consecutive_cards_set) >= 5:
                     continue
 
-                return True
+                for index in range(0, len(consecutive_cards_set) - 4):
+                    if self.draw_possibility(consecutive_cards_set[index: index + 5]):
+                        return True
 
         return False
 
@@ -145,10 +147,11 @@ class HandProcessor(object):
         """
         same_face_cards_dict = self.get_same_face_cards(self.hand_n_deck_cards)
         for face_cards_list in same_face_cards_dict.itervalues():
-            if not len(face_cards_list) >= times:
+            if not len(face_cards_list) == times:
                 continue
 
-            return True
+            if self.draw_possibility(face_cards_list):
+                return True
 
         return False
 
@@ -175,8 +178,33 @@ class HandProcessor(object):
         :return: <bool> Returns True if possible else False.
         """
         same_face_cards_dict = self.get_same_face_cards(self.hand_n_deck_cards)
-        same_face_cards_count = [len(suit_face_list) for suit_face_list in same_face_cards_dict.itervalues()]
-        return 3 in same_face_cards_count and 2 in same_face_cards_count
+        three_sets = list()
+        two_sets = list()
+        for same_face_cards_list in same_face_cards_dict.itervalues():
+            if len(same_face_cards_list) >= 3:
+                three_sets.append(same_face_cards_list)
+            if len(same_face_cards_list) >= 2:
+                two_sets.append(same_face_cards_list)
+
+        if not (three_sets and two_sets):
+            return False
+
+        for three_set in three_sets:
+            for index in range(0, len(three_set) - 2):
+                if not self.draw_possibility(three_set[index: index + 3]):
+                    continue
+
+            for two_set in two_sets:
+                if two_set == three_set:
+                    continue
+
+                for index_ in range(0, len(two_set) - 1):
+                    if not self.draw_possibility(two_set[index_: index_ + 2] + three_set[index: index + 3]):
+                        continue
+
+                    return True
+
+        return False
 
     def flush_possibility(self):
         """
@@ -189,7 +217,9 @@ class HandProcessor(object):
             if not len(suit_cards_list) >= 5:
                 continue
 
-            return True
+            for index in range(0, len(suit_cards_list) - 4):
+                if self.draw_possibility(suit_cards_list[index: index + 5]):
+                    return True
 
         return False
 
@@ -204,7 +234,9 @@ class HandProcessor(object):
             if not len(consecutive_cards_set) >= 5:
                 continue
 
-            return True
+            for index in range(0, len(consecutive_cards_set) - 4):
+                if self.draw_possibility(consecutive_cards_set[index: index + 5]):
+                    return True
 
         return False
 
@@ -214,14 +246,27 @@ class HandProcessor(object):
         :return: <bool> Returns True if possible else False.
         """
         same_face_cards_dict = self.get_same_face_cards(self.hand_n_deck_cards)
-        same_face_cards_count = [len(suit_face_list) for suit_face_list in same_face_cards_dict.itervalues()]
-        for times in range(0, no_of_pairs):
-            if 2 not in same_face_cards_count:
-                return False
+        pair_sets = list()
+        for same_face_cards in same_face_cards_dict.itervalues():
+            if len(same_face_cards) == 2:
+                pair_sets.append(same_face_cards)
 
-            same_face_cards_count.remove(2)
+        if len(pair_sets) < no_of_pairs:
+            return False
 
-        return True
+        drawable_pairs = list()
+        for pair_set in pair_sets:
+            drawable_cards = list()
+            for drawable_pair in drawable_pairs:
+                drawable_cards.extend(drawable_pair)
+
+            if self.draw_possibility(pair_set + drawable_cards):
+                drawable_pairs.append(pair_set)
+
+        if len(drawable_pairs) >= no_of_pairs:
+            return True
+
+        return False
 
     def one_pair_possibility(self):
         """
