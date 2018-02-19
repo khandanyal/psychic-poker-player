@@ -9,11 +9,10 @@ Input will consist of a series of lines, each containing the initial five cards 
 
 Each line of input should produce one line of output, consisting of the initial hand, the top five cards on the deck, and the best value of hand that is possible. Input is terminated by end of file.   
 
-Use the sample input and output as a guide. **Constraint omitted from problem: Note that the order of the cards in the player's hand is irrelevant, but the order of the cards in the deck is important because the discarded cards must be replaced from the top of the deck**. Also note that examples of all types of hands appear in the sample output, with the hands shown in decreasing order of value.  
-
+Use the sample input and output as a guide. Note that the order of the cards in the player's hand is irrelevant, but the order of the cards in the deck is important because the discarded cards must be replaced from the top of the deck. Also note that examples of all types of hands appear in the sample output, with the hands shown in decreasing order of value.
 ### Sample Input
 
-TH JH QC QD QS QH KH AH 2S 6S  
+TH JH QC QD QS QH KH 9H 2S 6S  
 2H 2S 3H 3S 3C 2D 3D 6C 9C TH  
 2H 2S 3H 3S 3C 2D 9C 3D 6C TH  
 2H AD 5H AC 7H AH 6H 9H 4H 3C  
@@ -25,8 +24,15 @@ AH 2C 9S AD 3C QH KS JS JD KD
 
 ### Sample Output
 
-**Hand**: TH JH QC QD QS **Deck**: QH KH AH 2S 6S **Best hand**: straight-flush  
+**Hand**: TH JH QC QD QS **Deck**: QH KH 9H 2S 6S **Best hand**: straight-flush  
 **Hand**: 2H 2S 3H 3S 3C **Deck**: 2D 3D 6C 9C TH **Best hand**: four-of-a-kind  
+**Hand**: 2H 2S 3H 3S 3C **Deck**: 2D 9C 3D 6C TH **Best hand**: full-house  
+**Hand**: 2H AD 5H AC 7H **Deck**: AH 6H 9H 4H 3C **Best hand**: flush  
+**Hand**: AC 2D 9C 3S KD **Deck**: 5S 4D KS AS 4C **Best hand**: straight  
+**Hand**: KS AH 2H 3C 4H **Deck**: KC 2C TC 2D AS **Best hand**: three-of-a-kind  
+**Hand**: AH 2C 9S AD 3C **Deck**: QH KS JS JD KD **Best hand**: two-pairs  
+**Hand**: 6C 9C 8C 2D 7C **Deck**: 2H TC 4C 9S AH **Best hand**: one-pair  
+**Hand**: 3D 5S 2H QD TD **Deck**: 6S KH 9H AD QH **Best hand**: highest-card  
 
 ### Hand Value (Descending)
 - **straight-flush**  
